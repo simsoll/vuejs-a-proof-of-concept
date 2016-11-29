@@ -49,6 +49,13 @@ const getters = {
     },
     cost (state) {
         return state.cost;
+    },
+    quantity (state) {
+        return state.products
+            .map(product => product.quantity)
+            .reduce((currSum, quantity) => {
+                return currSum + quantity;
+            }, 0);
     }
 }
 
