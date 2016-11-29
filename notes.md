@@ -49,6 +49,7 @@
  * mutations needs to be syncronous! (use Actions for async tasks) 
  * need v-model with vuex? use get/set on computed props: lecture 297
  * use modules/actions/mutations/getters files to split the store into smaller pieces: lecture 300
+* time-travel debugging using vue developer tools and vuex
 
 # Install using the vue-cli + simple webpack template
 npm install -g vue-cli
