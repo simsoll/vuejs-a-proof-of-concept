@@ -1,7 +1,7 @@
 <template>
     <div class="product">
         <h3>{{product.name}}</h3>
-        <p>Price: {{product.price}} $</p>
+        <p>Price: {{product.price | currency}}</p>
         <input 
             type="number" 
             placeholder="Quantity"
@@ -40,5 +40,6 @@ export default {
     border: 1px solid black;
     margin: 20px;
     width: 40%;
+    display: inline-block;    
 }
 </style>

@@ -2,14 +2,17 @@
     <div class="product">
         <h3>{{product.name}}</h3>
         <p>Price: {{product.price}} $</p>
-        <p>Quantity: {{product.quantity}} $</p>
+        <p>Quantity: {{product.quantity}}</p>
         <input 
             type="number" 
             placeholder="Quantity"
-            v-model="quantity">
+            v-model="quantity"
+            :class="{ alert: insufficientQuantity() }">
         <button
             @click="removeProduct"
-            :disabled="quantity < 1 || !Number.isInteger(quantity)">Remove</button>
+            :disabled="insufficientQuantity() || quantity < 1 || !Number.isInteger(quantity)"
+            >{{ insufficientQuantity() ? 'More than available' : 'Remove'}}
+            </button>
     </div>
 </template>
 
@@ -24,9 +27,9 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'removeProduct'
-        ]),
+        ...mapActions({
+            removeOrderFromCart: 'removeProduct'
+        }),
         removeProduct() {
             const order = {
                 productId: this.product.id,
@@ -34,7 +37,10 @@ export default {
                 quantity: this.quantity
             };
 
-            this.removeProduct();
+            this.removeOrderFromCart(order);
+        },
+        insufficientQuantity() {
+            return this.quantity > this.product.quantity;
         }
     }
 }
@@ -46,5 +52,10 @@ export default {
     border: 1px solid black;
     margin: 20px;
     width: 40%;
+    display: inline-block;
+}
+
+.alert {
+    border: 1px solid red;
 }
 </style>

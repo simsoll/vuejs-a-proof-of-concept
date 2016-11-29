@@ -1,6 +1,5 @@
 <template>
     <div> 
-        <h1>Product Catalog</h1>
         <product v-for="product in products" :product="product"></product>       
     </div>
 </template>
