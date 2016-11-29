@@ -7,5 +7,6 @@ export const routes = [
     { path: '/', component: Home},
     { path: '/products', component: Products},
     { path: '/cart', component: Cart},
-    { path: '/checkout', component: Checkout}
+    { path: '/checkout', component: Checkout},
+    { path: '*', redirect: '/' }
 ];
