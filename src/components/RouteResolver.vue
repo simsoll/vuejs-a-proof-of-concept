@@ -39,7 +39,8 @@ export default {
                               title: response.title,
                               template: response.template.toLowerCase().replace(/-/g, "")
                           };
-                        });
+                        })
+                        .catch(error => this.$router.push('/'));
         }
     }
 }
