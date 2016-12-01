@@ -1,6 +1,9 @@
 <template>
     <div>
-        <component :is="properties.template" :properties="properties"></component>
+        <component 
+            :is="properties.template" 
+            :properties="properties">
+        </component>
     </div>
 </template>
 

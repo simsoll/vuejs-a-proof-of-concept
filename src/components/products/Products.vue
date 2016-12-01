@@ -1,6 +1,9 @@
 <template>
     <div> 
-        <product v-for="product in products" :product="product"></product>       
+        <product 
+            v-for="product in products" 
+            :product="product">
+        </product>       
     </div>
 </template>
 

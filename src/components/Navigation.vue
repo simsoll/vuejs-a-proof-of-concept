@@ -5,8 +5,8 @@
         <router-link to="/cart" activeClass="active">Cart</router-link>
         <router-link to="/checkout" activeClass="active">Checkout</router-link>-->
         <router-link to="/bICCgfCphK" activeClass="active">FrontPage</router-link>
-        <router-link to="/bNWdVLeJOW" activeClass="active">Underside1</router-link>
-        <router-link to="/coDQrWQZxK" activeClass="active">Underside2</router-link>
+        <router-link to="/cfuSbunnZu" activeClass="active">Underside1</router-link>
+        <router-link to="/bKsbpeIwzm" activeClass="active">Underside2</router-link>
         <!--<p>Total cost: {{cost | currency}}</p>        -->
     </div>
 </template>

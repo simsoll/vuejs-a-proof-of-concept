@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <main>
         <navigation></navigation>
         <hr>
         <transition name="slide" mode="out-in">
             <router-view></router-view>
         </transition>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -21,6 +21,13 @@ export default {
 </script>
 
 <style>
+body {
+    margin: 0;
+}
+main {
+    padding: 20px;
+}
+
 .slide-enter-active {
     animation: slide-in 400ms ease-out forwards;
 }
