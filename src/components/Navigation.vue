@@ -7,6 +7,7 @@
         <router-link to="/bICCgfCphK" activeClass="active">FrontPage</router-link>
         <router-link to="/cfuSbunnZu" activeClass="active">Underside1</router-link>
         <router-link to="/bKsbpeIwzm" activeClass="active">Underside2</router-link>
+        <router-link to="/products" activeClass="active">Products</router-link>
         <!--<p>Total cost: {{cost | currency}}</p>        -->
     </div>
 </template>

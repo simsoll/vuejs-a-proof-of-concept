@@ -1,6 +1,11 @@
 <template>
     <div class="product">
-        <h3>{{product.name}}</h3>
+        <h5>{{product.name}}</h5>
+        <!--<favorite>fav</favorite>
+        <div>Pris: ###unitPrice</div>
+        <img src="###image###" alt="" />
+        <add-to-basket></add-to-basket>        -->
+        <!--<h3>{{product.name}}</h3>
         <p>Price: {{product.price}} $</p>
         <p>Quantity: {{product.quantity}}</p>
         <input 
@@ -12,37 +17,37 @@
             @click="removeProduct"
             :disabled="insufficientQuantity() || quantity < 1 || !Number.isInteger(quantity)"
             >{{ insufficientQuantity() ? 'More than available' : 'Remove'}}
-            </button>
+            </button>-->
     </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+// import {mapActions} from 'vuex';
 
 export default {
-    props: ['product'],
-    data() {
-        return {
-            quantity: 0
-        }
-    },
-    methods: {
-        ...mapActions({
-            removeOrderFromCart: 'removeProduct'
-        }),
-        removeProduct() {
-            const order = {
-                productId: this.product.id,
-                productPrice: this.product.price,
-                quantity: this.quantity
-            };
+    props: ['product']
+    // data() {
+    //     return {
+    //         quantity: 0
+    //     }
+    // },
+    // methods: {
+    //     ...mapActions({
+    //         removeOrderFromCart: 'removeProduct'
+    //     }),
+    //     removeProduct() {
+    //         const order = {
+    //             productId: this.product.id,
+    //             productPrice: this.product.price,
+    //             quantity: this.quantity
+    //         };
 
-            this.removeOrderFromCart(order);
-        },
-        insufficientQuantity() {
-            return this.quantity > this.product.quantity;
-        }
-    }
+    //         this.removeOrderFromCart(order);
+    //     },
+    //     insufficientQuantity() {
+    //         return this.quantity > this.product.quantity;
+    //     }
+    // }
 }
 </script>
 

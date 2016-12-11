@@ -28,8 +28,6 @@ export default {
     },    
     props: ['properties'],
     data() {
-        return {
-        };
     }
 }
 </script>

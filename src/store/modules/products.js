@@ -1,28 +1,25 @@
-import products from '../../data/products';
+import productService from '../../services/productService'
 
 const state = {
     products: []
 };
 
 const mutations = {
-    setProducts: (state, products) => {
-        state.products = products;
+    receiveProducts: (state, { products }) => {
+        state.products = products
     }
 };
 
 const actions = {
-    addProduct: (context, order) => {
-        context.commit('addProduct', order); //commit mutation in cart.js
-    },
-    initProducts: (context) => {
-        context.commit('setProducts', products)
+    getProducts: (context) => {
+        productService.getProducts().then(products => {
+            context.commit('receiveProducts', { products });
+        });
     }
 };
 
 const getters = {
-    products: state => {
-        return state.products;
-    }
+    products: state => state.products
 };
 
 export default {

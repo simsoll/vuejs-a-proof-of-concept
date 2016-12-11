@@ -4,3 +4,5 @@ export default [
     { id: 3, name: "Berries", price: 4 },
     { id: 4, name: "Milk", price: 6 }
 ];
+
+

@@ -13,9 +13,6 @@ import Navigation from './components/Navigation.vue';
 export default {
     components: {
         navigation: Navigation
-    },
-    created() {
-        this.$store.dispatch('initProducts');
     }
 }
 </script>
