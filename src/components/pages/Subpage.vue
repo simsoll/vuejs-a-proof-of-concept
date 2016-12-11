@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import RichText from '../richtext/RichText.vue';
+import RichText from '../richText/RichText.vue';
 import Gallery from '../gallery/Gallery.vue';
 
 export default {

@@ -1,60 +1,74 @@
 const state = {
-    cost: 0,
-    products: []
+    cart: []
 };
 
 const mutations = {
-    addProduct(state, {productId, quantity, productPrice}) {
-        const record = state.products.find(product => product.id === productId);
+    addToBasket: (state, { product, amount}) => {
+        const record = state.cart.find(element => element.product.id === product.id);
         if (record) {
-            record.quantity += quantity;
-        } 
-        else {
-            state.products.push({
-                id: productId,
-                quantity: quantity
-            });
+            record.amount += amount;
         }
-        state.cost += quantity * productPrice;
+        else {
+            state.cart.push({ product, amount});
+        }
     },
-    removeProduct(state, {productId, quantity, productPrice}) {
-        const record = state.products.find(product => product.id === productId);
-        if (record.quantity > quantity) {
-            record.quantity -= quantity;
-        }
-        else {
-            state.products.splice(state.products.indexOf(record));
-        }
-        state.cost -= quantity * productPrice;
+    emptyCart: (state) => {
+        state.cart = [];
     }
+    // addProduct(state, {productId, quantity, productPrice}) {
+    //     const record = state.products.find(product => product.id === productId);
+    //     if (record) {
+    //         record.quantity += quantity;
+    //     } 
+    //     else {
+    //         state.products.push({
+    //             id: productId,
+    //             quantity: quantity
+    //         });
+    //     }
+    //     state.cost += quantity * productPrice;
+    // },
+    // removeProduct(state, {productId, quantity, productPrice}) {
+    //     const record = state.products.find(product => product.id === productId);
+    //     if (record.quantity > quantity) {
+    //         record.quantity -= quantity;
+    //     }
+    //     else {
+    //         state.products.splice(state.products.indexOf(record));
+    //     }
+    //     state.cost -= quantity * productPrice;
+    // }
 }
 
 const actions = {
-    removeProduct(context, order) {
-        context.commit('removeProduct', order);
+    addToBasket(context, {product, amount}) {
+        context.commit('addToBasket', { product, amount});
+    },
+    emptyCart(context) {
+        context.commit('emptyCart');
     }
 };
 
 const getters = {
-    cart (state, getters) {
-        return state.products.map(product => {
-            const record = getters.products.find(element => element.id === product.id);
-            return {
-                id: product.id,
-                quantity: product.quantity,
-                name: record.name,
-                price: record.price
-            };
-        });
-    },
-    cost (state) {
-        return state.cost;
-    },
-    quantity (state) {
-        return state.products
-            .map(product => product.quantity)
-            .reduce((currSum, quantity) => {
-                return currSum + quantity;
+    // cart (state, getters) {
+    //     return state.products.map(product => {
+    //         const record = getters.products.find(element => element.id === product.id);
+    //         return {
+    //             id: product.id,
+    //             quantity: product.quantity,
+    //             name: record.name,
+    //             price: record.price
+    //         };
+    //     });
+    // },
+    // cost (state) {
+    //     return state.cost;
+    // },
+    totalCartSize (state) {
+        return state.cart
+            .map(item => item.amount)
+            .reduce((currSum, amount) => {
+                return currSum + amount;
             }, 0);
     }
 }

@@ -1,7 +1,23 @@
 <template>
     <div>
         <h1>Product List</h1>
-        <product v-for="product in products" :product="product"></product>
+        <div>
+                Sort by:
+                <input type="radio" id="name" value="name" v-model="sortBy">
+                <label for="name">name</label>
+                <input type="radio" id="price" value="price" v-model="sortBy">
+                <label for="price">price</label>  
+        </div>
+        <div>
+                Filter by:
+                <input type="radio" id="all" value="all" v-model="filterBy">
+                <label for="all">all</label>
+                <input type="radio" id="favorites" value="favorites" v-model="filterBy">
+                <label for="favorites">favorites</label>  
+                <input type="radio" id="nonfavorites" value="nonfavorites" v-model="filterBy">
+                <label for="nonfavorites">non-favorites</label> 
+        </div>
+        <product v-for="product in visibleProducts" :product="product"></product>
     </div>
 </template>
 <script>
@@ -13,9 +29,40 @@ export default {
     components: {
         product: Product
     },
-    computed: mapGetters({
+    data() {
+        return {
+            sortBy: 'name',
+            filterBy: 'favorites'
+        }
+    },
+    computed: {
+        visibleProducts: function() {
+            return this.products
+                       .filter(function(product) {
+                           if (this.filterBy === "favorites") {
+                               return product.isfavorite
+                           }
+                           if (this.filterBy === "nonfavorites") {
+                               return !product.isfavorite;
+                           }
+                           
+                           return true;                           
+                       }.bind(this)) //we need to bind this to the sorting function to be able to access this.filterBy in the function definition
+                       .sort(function(a,b) {
+                            if (typeof a[this.sortBy] === 'number') {
+                                return a[this.sortBy] - b[this.sortBy];
+                            }
+                            if (typeof a[this.sortBy] === 'string') {
+                                return a[this.sortBy].localeCompare(b[this.sortBy]);
+                            }
+
+                            return -1;
+                        }.bind(this)); //we need to bind this to the sorting function to be able to access this.sortBy in the function definition
+        },
+        ...mapGetters({
         products: 'products'
-    }),    
+        })
+    },    
     created () {
 	    this.$store.dispatch('getProducts')
 	}    

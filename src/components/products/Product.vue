@@ -12,12 +12,19 @@
     </div>
 </template>-->
 <template>
-    <div class="product">
+    <div 
+        class="product"
+        :class="{ unavailable: !product.availability }">
         <h5>{{product.name}}</h5>
-        <!--<favorite>fav</favorite>
-        <div>Pris: ###unitPrice</div>
-        <img src="###image###" alt="" />
-        <add-to-basket></add-to-basket>        -->
+        <favorite :isFavorite="product.isfavorite" v-on:toogle="toggleFavorite"></favorite>
+        <div>Pris: {{product.price | currency }}</div>
+        <!--<img :src="product.image" alt="">-->
+        <add-to-basket 
+            :amount="amount"
+            v-on:decrement="decrementAmount"
+            v-on:increment="incrementAmount"
+            v-on:add="addToBasket">
+        </add-to-basket>
         <!--<h3>{{product.name}}</h3>
         <p>Price: {{product.price}} $</p>
         <p>Quantity: {{product.quantity}}</p>
@@ -35,13 +42,40 @@
 </template>
 
 <script>
+import AddToBasket from '../addToBasket/AddToBasket.vue';
+import Favorite from '../favorite/Favorite.vue';
+
 export default {
-    props: ['product']
-    // data() {
-    //     return {
-    //         quantity: 0
-    //     }
-    // },
+    components: {
+        addToBasket: AddToBasket,
+        favorite: Favorite
+    },
+    props: ['product'],
+    methods: {
+        toggleFavorite: function() {
+            this.$store.dispatch('toogleFavorite', this.product);
+        },
+        decrementAmount: function() {
+            if (this.amount > 0) {
+                this.amount--;
+            }
+        },
+        incrementAmount: function() {
+            this.amount++;
+        },
+        addToBasket: function() {
+            this.$store.dispatch('addToBasket', {
+                product: this.product, 
+                amount: this.amount 
+            });
+            this.amount = 0;
+        }
+    },
+    data() {
+        return {
+            amount: 0
+        }
+    }
     // methods: {
     //     addProduct() {
     //         const order = {
@@ -63,5 +97,8 @@ export default {
     margin: 20px;
     width: 40%;
     display: inline-block;    
+}
+.unavailable {
+    opacity: 0.25;
 }
 </style>

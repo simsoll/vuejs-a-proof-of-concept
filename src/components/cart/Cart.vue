@@ -7,7 +7,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import Product from './Product.vue';
+import Product from '../products/Product.vue';
 
 export default {
     computed: {
