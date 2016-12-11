@@ -7,6 +7,9 @@
                 <label for="name">name</label>
                 <input type="radio" id="price" value="price" v-model="sortBy">
                 <label for="price">price</label>  
+                //// Ascending?:
+                <input type="checkbox" id="checkbox" v-model="asc">
+                <label for="checkbox"></label>                 
         </div>
         <div>
                 Filter by:
@@ -32,7 +35,8 @@ export default {
     data() {
         return {
             sortBy: 'name',
-            filterBy: 'favorites'
+            filterBy: 'favorites',
+            asc: true
         }
     },
     computed: {
@@ -49,14 +53,16 @@ export default {
                            return true;                           
                        }.bind(this)) //we need to bind this to the sorting function to be able to access this.filterBy in the function definition
                        .sort(function(a,b) {
+                            const multiplier = this.asc ? 1 : -1;
+
                             if (typeof a[this.sortBy] === 'number') {
-                                return a[this.sortBy] - b[this.sortBy];
+                                return multiplier * (a[this.sortBy] - b[this.sortBy]);
                             }
                             if (typeof a[this.sortBy] === 'string') {
-                                return a[this.sortBy].localeCompare(b[this.sortBy]);
+                                return multiplier * a[this.sortBy].localeCompare(b[this.sortBy]);
                             }
 
-                            return -1;
+                            return multiplier*-1;
                         }.bind(this)); //we need to bind this to the sorting function to be able to access this.sortBy in the function definition
         },
         ...mapGetters({
