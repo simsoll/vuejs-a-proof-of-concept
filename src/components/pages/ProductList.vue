@@ -42,7 +42,7 @@ export default {
     computed: {
         visibleProducts: function() {
             return this.products
-                       .filter(function(product) {
+                       .filter((product) => {
                            if (this.filterBy === "favorites") {
                                return product.isfavorite
                            }
@@ -51,8 +51,8 @@ export default {
                            }
                            
                            return true;                           
-                       }.bind(this)) //we need to bind this to the sorting function to be able to access this.filterBy in the function definition
-                       .sort(function(a,b) {
+                       })
+                       .sort((a,b) => {
                             const multiplier = this.asc ? 1 : -1;
 
                             if (typeof a[this.sortBy] === 'number') {
@@ -63,7 +63,7 @@ export default {
                             }
 
                             return multiplier*-1;
-                        }.bind(this)); //we need to bind this to the sorting function to be able to access this.sortBy in the function definition
+                        });
         },
         ...mapGetters({
         products: 'products'
