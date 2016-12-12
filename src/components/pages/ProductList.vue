@@ -20,7 +20,7 @@
                 <input type="radio" id="nonfavorites" value="nonfavorites" v-model="filterBy">
                 <label for="nonfavorites">non-favorites</label> 
         </div>
-        <product v-for="product in visibleProducts" :product="product"></product>
+        <product v-for="product in sortedProducts" :product="product"></product>
     </div>
 </template>
 <script>
@@ -39,31 +39,43 @@ export default {
             asc: true
         }
     },
+    methods: {
+        filter(products, value) {
+            return products.filter((product) => {
+                if (value === "favorites") {
+                    return product.isfavorite
+                }
+                if (value === "nonfavorites") {
+                    return !product.isfavorite;
+                }
+                
+                return true;                           
+            });
+        },
+        sort(products, value) {
+            return products.sort((a,b) => {
+                const multiplier = this.asc ? 1 : -1;
+
+                if (typeof a[value] === 'number') {
+                    return multiplier * (a[value] - b[value]);
+                }
+                if (typeof a[value] === 'string') {
+                    return multiplier * a[value].localeCompare(b[value]);
+                }
+
+                return multiplier*-1;
+            });
+        }
+    },
+    //using the collection pipeline pattern --> changing this.sortBy will NOT run filteredProducts!
     computed: {
-        visibleProducts: function() {
-            return this.products
-                       .filter((product) => {
-                           if (this.filterBy === "favorites") {
-                               return product.isfavorite
-                           }
-                           if (this.filterBy === "nonfavorites") {
-                               return !product.isfavorite;
-                           }
-                           
-                           return true;                           
-                       })
-                       .sort((a,b) => {
-                            const multiplier = this.asc ? 1 : -1;
-
-                            if (typeof a[this.sortBy] === 'number') {
-                                return multiplier * (a[this.sortBy] - b[this.sortBy]);
-                            }
-                            if (typeof a[this.sortBy] === 'string') {
-                                return multiplier * a[this.sortBy].localeCompare(b[this.sortBy]);
-                            }
-
-                            return multiplier*-1;
-                        });
+        filteredProducts() {
+            console.log("Data was filtered!")
+            return this.filter(this.products, this.filterBy);
+        },
+        sortedProducts() {
+            console.log("Data was sorted!")
+            return this.sort(this.filteredProducts, this.sortBy)
         },
         ...mapGetters({
         products: 'products'
