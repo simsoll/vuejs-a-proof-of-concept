@@ -17,7 +17,7 @@ export default {
         }
     },
     methods: {
-        emptyCart: function() {
+        emptyCart() {
             this.$store.dispatch('emptyCart');
         }
     }

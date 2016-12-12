@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import Product from '../products/Product.vue';
+import Product from '../product/Product.vue';
 import { mapGetters } from 'vuex';
 import productService from '../../services/productService'
 
@@ -32,13 +32,11 @@ export default {
     components: {
         product: Product
     },
-    data() {
-        return {
-            sortBy: 'name',
-            filterBy: 'favorites',
-            asc: true
-        }
-    },
+    data: () => ({
+        sortBy: 'name',
+        filterBy: 'favorites',
+        asc: true
+    }),
     methods: {
         filter(products, value) {
             return products.filter((product) => {

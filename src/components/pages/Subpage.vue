@@ -20,11 +20,7 @@ export default {
         richtext: RichText,
         gallery: Gallery
     },    
-    props: ['properties'],
-    data() {
-        return {
-        };
-    }
+    props: ['properties']
 }
 </script>
 

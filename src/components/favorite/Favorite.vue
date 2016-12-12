@@ -11,7 +11,7 @@
 export default {
     props: ['isFavorite'],
     methods: {
-        toogle: function() {
+        toogle() {
             this.$emit('toogle');
         }
     }

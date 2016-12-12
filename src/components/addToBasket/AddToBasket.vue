@@ -11,13 +11,13 @@
 export default {
     props: ['amount'],
     methods: {
-        decrement: function() {
+        decrement() {
             this.$emit('decrement');
         },
-        increment: function() {
+        increment() {
             this.$emit('increment');
         },
-        add: function() {
+        add() {
             this.$emit('add');
         }
     }
