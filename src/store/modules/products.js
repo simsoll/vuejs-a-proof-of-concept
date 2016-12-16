@@ -19,7 +19,6 @@ const mutations = {
 
 const actions = {
     getProducts: (context) => {
-        debugger;
         productService.getProducts().then(products => {
             context.commit('receiveProducts', { products });
         });
