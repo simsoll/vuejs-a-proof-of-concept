@@ -34,7 +34,7 @@ export default {
     },
     data: () => ({
         sortBy: 'name',
-        filterBy: 'favorites',
+        filterBy: 'all',
         asc: true
     }),
     methods: {
