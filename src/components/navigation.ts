@@ -1,33 +1,24 @@
-<template>
+import Vue = require('vue');
+import Component from 'vue-class-component';
+
+@Component({
+  template: `
     <div>        
         <router-link to="/bICCgfCphK" activeClass="active">FrontPage</router-link>
         <router-link to="/cfuSbunnZu" activeClass="active">Underside1</router-link>
         <router-link to="/bKsbpeIwzm" activeClass="active">Underside2</router-link>
         <router-link to="/products" activeClass="active">Products</router-link>
         <p>Total cart size: {{totalCartSize}}</p>
-        <button v-on:click="emptyCart">Empty cart?</button>
+        <button v-on:click="emptyCart">Empty cart?</button>        
     </div>
-</template>
+  `
+})
+export default class Navigation extends Vue {
+  get totalCartSize() {
+      return this.$store.getters.totalCartSize;
+  }  
 
-<script>
-export default {
-    computed: {
-        totalCartSize() {
-            return this.$store.getters.totalCartSize;
-        }
-    },
-    methods: {
-        emptyCart() {
-            this.$store.dispatch('emptyCart');
-        }
-    }
-    
+  emptyCart() {
+      this.$store.dispatch('emptyCart');
+  }  
 }
-
-</script>
-
-<style scoped>
-.active {
-    color: red;
-} 
-</style>

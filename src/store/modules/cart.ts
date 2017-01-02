@@ -1,18 +1,26 @@
-const state = {
+import { ICartItem } from '../../models/cart';
+import { IState } from '../../models/state';
+import { ActionContext } from 'vuex';
+
+const state: IState = {
     cart: []
 };
 
 const mutations = {
-    addToBasket: (state, { product, amount}) => {
-        const record = state.cart.find(element => element.product.id === product.id);
+    addToBasket: (state: IState, item: ICartItem): void => {
+        if (!state.cart) {
+            return;
+        }
+
+        const record = state.cart.find(cartItem => cartItem.product.id === item.product.id);
         if (record) {
-            record.amount += amount;
+            record.amount += item.amount;
         }
         else {
-            state.cart.push({ product, amount});
+            state.cart.push(item);
         }
     },
-    emptyCart: (state) => {
+    emptyCart: (state: IState) => {
         state.cart = [];
     }
     // addProduct(state, {productId, quantity, productPrice}) {
@@ -41,10 +49,10 @@ const mutations = {
 }
 
 const actions = {
-    addToBasket(context, {product, amount}) {
-        context.commit('addToBasket', { product, amount});
+    addToBasket(context: ActionContext<IState, IState>, item: ICartItem) {
+        context.commit('addToBasket', item);
     },
-    emptyCart(context) {
+    emptyCart(context: ActionContext<IState, IState>) {
         context.commit('emptyCart');
     }
 };
@@ -64,7 +72,11 @@ const getters = {
     // cost (state) {
     //     return state.cost;
     // },
-    totalCartSize (state) {
+    totalCartSize (state: IState) {
+        if (!state.cart) {
+            return 0;
+        }
+
         return state.cart
             .map(item => item.amount)
             .reduce((currSum, amount) => {

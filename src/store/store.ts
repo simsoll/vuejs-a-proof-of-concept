@@ -1,7 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue = require('vue');
+import Vuex = require('vuex');
 
 import products from './modules/products';
+import { IState } from '../models/state';
 import cart from './modules/cart';
 
 Vue.use(Vuex);
