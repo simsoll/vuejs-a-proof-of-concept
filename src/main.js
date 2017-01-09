@@ -1,26 +1,31 @@
-import Vue = require('vue');
-import VueRouter = require('vue-router');
-// import VueResource from 'vue-resource';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 import App from './app';
 import { routes } from './routes';
 import store from './store/store';
+import { sync } from 'vuex-router-sync'
+
 
 Vue.use(VueRouter);
-// Vue.use(VueResource);
 
-Vue.filter('currency', (value: string) => {
+Vue.filter('currency', value => {
   return '$' + value.toLocaleString();
 });
 
 const router = new VueRouter({
   routes,
   mode: 'history',
+  base: __dirname,  
 });
 
-new Vue({
+sync(store, router)
+
+const app = new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  ...App
 });
+
+export { app, router, store }
