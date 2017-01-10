@@ -80,8 +80,6 @@ app.get('*', (req, res) => {
   })
 
   renderStream.on('error', err => {
-      debugger;
-      console.log(err);
     throw err
   })
 })

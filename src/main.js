@@ -22,7 +22,6 @@ const router = new VueRouter({
 sync(store, router)
 
 const app = new Vue({
-  el: '#app',
   router,
   store,
   ...App
