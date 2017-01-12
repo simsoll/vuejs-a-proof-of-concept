@@ -4,8 +4,7 @@ import { IProduct } from '../../models/product';
 import { ActionContext } from 'vuex';
 
 const state = {
-    products: [],
-    cart: []
+    products: []
 };
 
 const mutations = {

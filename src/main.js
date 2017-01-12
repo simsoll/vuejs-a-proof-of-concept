@@ -2,21 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import App from './app';
-import { routes } from './routes';
+import router from './router/router';
 import store from './store/store';
 import { sync } from 'vuex-router-sync'
 
 
-Vue.use(VueRouter);
-
 Vue.filter('currency', value => {
   return '$' + value.toLocaleString();
-});
-
-const router = new VueRouter({
-  routes,
-  mode: 'history',
-  base: __dirname,  
 });
 
 sync(store, router)

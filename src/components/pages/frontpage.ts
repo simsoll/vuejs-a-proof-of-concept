@@ -21,7 +21,8 @@ import Gallery from '../gallery';
                 </component>
             </div>
         </div>
-    `
+    `,
+    name: 'frontpage'
 })
 export default class FrontPage extends Vue {
 }
