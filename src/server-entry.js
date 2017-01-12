@@ -25,7 +25,17 @@ export default context => {
   // updated.
   return Promise.all(matchedComponents.map(component => {
     if (component.extendOptions.methods.preFetch) {
-      return component.extendOptions.methods.preFetch(store, context.url)
+      return component.extendOptions.methods
+        .preFetch(store, context)
+        .then(data => {
+          const currentData = component.options.data();
+
+          component.options.data = function() {
+              return Object.assign(currentData, {
+                data: data
+              });
+          }
+        });
     }
   })).then(() => {
     isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)

@@ -2,13 +2,14 @@ import { getProducts } from '../../services/product';
 import { IState } from '../../models/state';
 import { IProduct } from '../../models/product';
 import { ActionContext } from 'vuex';
+import { Promise } from 'es6-promise';
 
 const state = {
     products: []
 };
 
 const mutations = {
-    receiveProducts: (state: IState, products: IProduct[]): void => {
+    setProducts: (state: IState, products: IProduct[]): void => {
         state.products = products
     },
     toogleFavorite: (state: IState, product: IProduct): void => {
@@ -24,9 +25,9 @@ const mutations = {
 };
 
 const actions = {
-    getProducts: (context: ActionContext<IState, IState>) => {
-        getProducts().then(products => {
-            context.commit('receiveProducts', products);
+    fetchProducts: (context: ActionContext<IState, IState>): Promise<void> => {
+        return getProducts().then(products => {
+            context.commit('setProducts', products);
         });
     },
     toogleFavorite(context: ActionContext<IState, IState>, product: IProduct) {

@@ -27,7 +27,8 @@ import Gallery from '../gallery';
                 </component>
             </div>    
         </div>
-    `
+    `,
+    name: 'subpage-sidebar'
 })
 export default class SubpageSidebar extends Vue {
 }

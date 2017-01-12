@@ -3,13 +3,10 @@ import Component from 'vue-class-component'
 import Product from '../product';
 import { IProduct } from '../../models/product'
 
-import { mapGetters } from 'vuex';
-
 @Component({
     components: {
         product: Product
     },
-    props: ['properties'],    
     template: `
         <div>
             <h1>Product List</h1>
@@ -34,12 +31,19 @@ import { mapGetters } from 'vuex';
             </div>
             <product v-for="product in sortedProducts" :product="product"></product>
         </div>
-    `
+    `,
+    name: 'product-list',
+    watch: {
+        // call again the method if the route changes
+        '$route': 'fetchData'
+    }
 })
 export default class ProductList extends Vue {
     sortBy: string = 'name';
     filterBy: string = 'all';
     asc: boolean = true;
+
+    data: IProduct[] = [];
 
     filter(products: IProduct[], value: string): IProduct[] {
         return products.filter((product: IProduct) => {
@@ -72,17 +76,28 @@ export default class ProductList extends Vue {
     //using the collection pipeline pattern --> changing this.sortBy will NOT run filteredProducts!
     get filteredProducts(): IProduct[] {
         console.log("Data was filtered!");
-        return this.filter(this.products, this.filterBy);
+        return this.filter(this.data, this.filterBy);
     }
     get sortedProducts(): IProduct[] {
         console.log("Data was sorted!");
         return this.sort(this.filteredProducts, this.sortBy);
     }
-    get products(): IProduct[] {
-        return this.$store.getters.products;
+
+    fetchData() {
+        console.log('product-list fetches data!');
+        this.$store.dispatch('fetchProducts').then(() => {
+            this.data = this.$store.getters.products;
+        });
     }
 
-    created () {
-	    this.$store.dispatch('getProducts');
-	}      
+    // this will be called during SSR to pre-fetch data into the store!
+    preFetch(store: any, context: any) {
+        return store.dispatch('fetchProducts').then(() => {
+            return store.getters.products;
+        });        
+    }    
+
+    beforeMount() {
+        this.data = this.$store.getters.products;
+    } 
 }
