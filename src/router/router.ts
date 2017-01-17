@@ -10,6 +10,10 @@ Vue.use(Router)
 export default new Router({
     mode: 'history',
     routes: [
+        {
+            path: '/',
+            redirect: '/products'
+        },        
         { 
             path: '/products', 
             component: ProductList
