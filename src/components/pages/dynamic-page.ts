@@ -22,7 +22,12 @@ import { IPageData } from '../../models/page-data';
                 :properties="data">
             </component>
         </div>
-    `
+    `,
+    watch: {
+        // call again the method if the route changes
+        '$route': 'fetchData'
+    }
+    
 })
 export default class DynamicPage extends Vue {
     data: IPageData = {

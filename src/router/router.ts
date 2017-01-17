@@ -1,6 +1,7 @@
 import Vue = require('vue');
 import Router = require('vue-router');
 
+import FormPage from '../components/pages/form-page';
 import ProductList from '../components/pages/product-list';
 import DynamicPage from '../components/pages/dynamic-page';
 import { RouteConfig } from 'vue-router';
@@ -18,6 +19,10 @@ export default new Router({
             path: '/products', 
             component: ProductList
         },
+        { 
+            path: '/form', 
+            component: FormPage
+        },        
         {
             path: '/*',
             component: DynamicPage
