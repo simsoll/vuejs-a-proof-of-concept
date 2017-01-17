@@ -11,7 +11,7 @@ import { IPageData } from '../../models/page-data';
 
 @Component({
     components: {
-        'frontpage': Frontpage,
+        frontpage: Frontpage,
         subpage: Subpage,
         subpagesidebar: SubpageSidebar
     },
@@ -22,11 +22,7 @@ import { IPageData } from '../../models/page-data';
                 :properties="data">
             </component>
         </div>
-    `,
-    watch: {
-        // call again the method if the route changes
-        '$route': 'fetchData'
-    }
+    `
 })
 export default class DynamicPage extends Vue {
     data: IPageData = {
@@ -36,8 +32,7 @@ export default class DynamicPage extends Vue {
     };
 
     fetchData() {
-            console.log('dynamic-page fetches data!');
-            this.$store.dispatch('fetchPageData', this.$route.path).then(() => {
+        this.$store.dispatch('fetchPageData', this.$route.path).then(() => {
             this.data = this.$store.getters.pageData;
         });
     }
@@ -50,6 +45,11 @@ export default class DynamicPage extends Vue {
     }
 
     beforeMount () {
-        this.data = this.$store.getters.pageData;
+        if (this.$store.getters.pageData.template) {
+            this.data = this.$store.getters.pageData;            
+        }
+        else {
+            this.fetchData();
+        }
     }
 }

@@ -32,11 +32,7 @@ import { IProduct } from '../../models/product'
             <product v-for="product in sortedProducts" :product="product"></product>
         </div>
     `,
-    name: 'product-list',
-    watch: {
-        // call again the method if the route changes
-        '$route': 'fetchData'
-    }
+    name: 'product-list'
 })
 export default class ProductList extends Vue {
     sortBy: string = 'name';
@@ -84,7 +80,6 @@ export default class ProductList extends Vue {
     }
 
     fetchData() {
-        console.log('product-list fetches data!');
         this.$store.dispatch('fetchProducts').then(() => {
             this.data = this.$store.getters.products;
         });
@@ -98,6 +93,11 @@ export default class ProductList extends Vue {
     }    
 
     beforeMount() {
-        this.data = this.$store.getters.products;
+        if (this.$store.getters.products.length > 0) {
+            this.data = this.$store.getters.products;
+        }
+        else {
+            this.fetchData();
+        }
     } 
 }
