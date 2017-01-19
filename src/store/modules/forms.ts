@@ -16,30 +16,36 @@ const mutations = {
         if (!state.formData) {
             return;
         }
-        state.formData.name = name;
+        state.formData = Object.assign({}, state.formData, { name });
     },
 
     setEmail: (state: IState, email: string): void => {
         if (!state.formData) {
             return;
         }
-        state.formData.email = email;
+        state.formData = Object.assign({}, state.formData, { email });
     },
 
     setZip: (state: IState, zip: number): void => {
         if (!state.formData) {
             return;
         }
-        state.formData.zip = zip;
+        state.formData = Object.assign({}, state.formData, { zip });
     },
 
     setAddress: (state: IState, address: string): void => {
         if (!state.formData) {
             return;
         }
-        state.formData.address = address;
+        state.formData = Object.assign({}, state.formData, { address });
     }           
 };
+
+const actions = {
+    setName(context: ActionContext<IState, IState>, name: string) {
+        context.commit('setName', name);
+    }    
+}
 
 const getters = {
     formData: (state: IState) => state.formData
@@ -47,6 +53,7 @@ const getters = {
 
 export default {
     state,
+    actions,
     mutations,
     getters
 }

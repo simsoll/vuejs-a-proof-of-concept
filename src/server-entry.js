@@ -24,7 +24,7 @@ export default context => {
   // which is resolved when the action is complete and store state has been
   // updated.
   return Promise.all(matchedComponents.map(component => {
-    if (component.extendOptions.methods.preFetch) {
+    if (component.extendOptions.methods && component.extendOptions.methods.preFetch) {
       return component.extendOptions.methods
         .preFetch(store, context)
         .then(data => {
