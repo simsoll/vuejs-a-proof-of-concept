@@ -1,4 +1,4 @@
-import { getPageData } from '../../services/pageData';
+import { getPageData } from '../../services/page-data';
 import { IState } from '../../models/state';
 import { IProduct } from '../../models/product';
 import { IPageData } from '../../models/page-data';

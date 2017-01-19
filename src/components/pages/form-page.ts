@@ -5,9 +5,13 @@ import Component from 'vue-class-component'
 @Component({
     template: `
         <div>
-            Form page!
+            
         </div>
     `
 })
 export default class FormPage extends Vue {
+    
+    get formData() {
+        return this.$store.getters.formData;
+    }
 }
