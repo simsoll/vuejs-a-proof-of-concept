@@ -22,6 +22,7 @@ import Gallery from '../gallery';
             </div>            
         </div>
     `,
+    name: 'subpage'
 })
 export default class Subpage extends Vue {
 }

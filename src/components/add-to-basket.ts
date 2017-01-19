@@ -10,7 +10,8 @@ import Component from 'vue-class-component'
             <button v-on:click="add">Add</button>
             {{amount || 0}}
         </div>
-    `
+    `,
+    name: 'add-to-basket'
 })
 export default class AddToBasket extends Vue {
     decrement() {

@@ -8,6 +8,7 @@ import Component from 'vue-class-component';
         <router-link to="/cfuSbunnZu" activeClass="active">Underside1</router-link>
         <router-link to="/bKsbpeIwzm" activeClass="active">Underside2</router-link>
         <router-link to="/products" activeClass="active">Products</router-link>
+        <router-link to="/form" activeClass="active">Form</router-link>
         <p>Total cart size: {{totalCartSize}}</p>
         <button v-on:click="emptyCart">Empty cart?</button>        
     </div>
