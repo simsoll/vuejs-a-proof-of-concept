@@ -33,7 +33,8 @@ export default class DynamicPage extends Vue {
     data: IPageData = {
         data: {},
         template: '',
-        title: ''
+        title: '',
+        url: ''
     };
 
     fetchData() {
@@ -50,7 +51,8 @@ export default class DynamicPage extends Vue {
     }
 
     beforeMount () {
-        if (this.$store.getters.pageData.template) {
+        if (this.$store.getters.pageData.url === this.$route.path) {
+            console.log('data has already been loaded!');
             this.data = this.$store.getters.pageData;            
         }
         else {

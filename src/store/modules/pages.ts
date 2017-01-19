@@ -8,7 +8,8 @@ import { Promise } from 'es6-promise';
 const initialPage: IPageData = {
     data: {},
     template: '',
-    title: ''
+    title: '',
+    url: ''
 };
 
 const state: IState = {

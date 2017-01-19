@@ -10,7 +10,8 @@ export const getPageData = (url: string) => {
         return {
             data: response.data.data,
             title: response.data.title,
-            template: response.data.template.toLowerCase().replace(/-/g, "")
+            template: response.data.template.toLowerCase().replace(/-/g, ""),
+            url: url
         };
     });
 }
