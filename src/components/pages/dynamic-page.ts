@@ -39,21 +39,21 @@ export default class DynamicPage extends Vue {
 
     fetchData() {
         this.$store.dispatch('fetchPageData', this.$route.path).then(() => {
-            this.data = this.$store.getters.pageData;
+            this.data = this.$store.state.pages.currentPage;
         });
     }
 
     // this will be called during SSR to pre-fetch data into the store!
     preFetch(store: any, context: any) {
         return store.dispatch('fetchPageData', context.url).then(() => {
-            return store.getters.pageData;
+            return store.state.pages.currentPage;
         });
     }
 
     beforeMount () {
-        if (this.$store.getters.pageData.url === this.$route.path) {
+        if (this.$store.state.pages.currentPage.url === this.$route.path) {
             console.log('data has already been loaded!');
-            this.data = this.$store.getters.pageData;            
+            this.data = this.$store.state.pages.currentPage;            
         }
         else {
             this.fetchData();

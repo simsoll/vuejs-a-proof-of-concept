@@ -23,7 +23,9 @@ export default class FormPage extends Vue {
     updateZip = (event: any): void => this.$store.commit('setZip', event.target.value);
     updateAddress = (event: any): void => this.$store.commit('setAddress', event.target.value);
 
+
+
     get formData() {
-        return this.$store.getters.formData;
+        return this.$store.state.forms.formData; //return this.$store.state.formData;
     }
 }

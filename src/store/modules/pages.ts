@@ -30,13 +30,8 @@ const actions = {
     },
 };
 
-const getters = {
-    pageData: (state: IState) => state.currentPage
-};
-
 export default {
     state,
     mutations,
-    actions,
-    getters
+    actions
 }

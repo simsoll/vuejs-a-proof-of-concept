@@ -47,13 +47,8 @@ const actions = {
     }    
 }
 
-const getters = {
-    formData: (state: IState) => state.formData
-};
-
 export default {
     state,
     actions,
-    mutations,
-    getters
+    mutations
 }

@@ -81,20 +81,20 @@ export default class ProductList extends Vue {
 
     fetchData() {
         this.$store.dispatch('fetchProducts').then(() => {
-            this.data = this.$store.getters.products;
+            this.data = this.$store.state.products.products;
         });
     }
 
     // this will be called during SSR to pre-fetch data into the store!
     preFetch(store: any, context: any) {
         return store.dispatch('fetchProducts').then(() => {
-            return store.getters.products;
+            return store.state.products.products;
         });        
     }    
 
     beforeMount() {
-        if (this.$store.getters.products.length > 0) {
-            this.data = this.$store.getters.products;
+        if (this.$store.state.products.products.length > 0) {
+            this.data = this.$store.state.products.products;
         }
         else {
             this.fetchData();

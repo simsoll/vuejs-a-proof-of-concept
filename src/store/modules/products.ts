@@ -35,13 +35,8 @@ const actions = {
     }
 };
 
-const getters = {
-    products: (state: IState) => state.products
-};
-
 export default {
     state,
     mutations,
-    actions,
-    getters
+    actions
 }
