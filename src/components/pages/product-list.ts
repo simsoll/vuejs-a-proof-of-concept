@@ -43,14 +43,14 @@ export default class ProductList extends Vue {
 
     filter(products: IProduct[], value: string): IProduct[] {
         return products.filter((product: IProduct) => {
-            if (value === "favorites") {
-                return product.isfavorite
+            switch (value) {
+                case 'favorites':
+                    return product.isfavorite;
+                case 'nonfavorites':
+                    return !product.isfavorite;
+                default:
+                    return true;
             }
-            if (value === "nonfavorites") {
-                return !product.isfavorite;
-            }
-            
-            return true;                           
         });
     }
 
@@ -58,14 +58,14 @@ export default class ProductList extends Vue {
         return products.sort((a,b) => {
             const multiplier = this.asc ? 1 : -1;
 
-            if (typeof a[value] === 'number') {
-                return multiplier * (a[value] - b[value]);
+            switch(typeof a[value]) {
+                case 'number':
+                    return multiplier * (a[value] - b[value]);
+                case 'string':
+                    return multiplier * a[value].localeCompare(b[value]);
+                default:
+                    return multiplier*-1;
             }
-            if (typeof a[value] === 'string') {
-                return multiplier * a[value].localeCompare(b[value]);
-            }
-
-            return multiplier*-1;
         });
     }    
 

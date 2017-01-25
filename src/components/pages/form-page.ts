@@ -9,22 +9,22 @@ import { IFormData } from '../../models/form-data'
             <form>   
                 <div>
                     <label for="name">Name</label>
-                    <input v-validate name="formData.name" id="name" data-vv-rules="required|alpha_spaces" :value="formData.name" type="text" @input="updateName">
+                    <input v-validate name="name" id="name" data-vv-rules="required|alpha_spaces" :value="formData.name" type="text" @input="updateName">
                     <span>{{ errors.first('formData.name') }} </span>
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input v-validate name="formData.email" id="email" data-vv-rules="required|email" :value="formData.email" type="email" @input="updateEmail">
+                    <input v-validate name="email" id="email" data-vv-rules="required|email" :value="formData.email" type="email" @input="updateEmail">
                     <span>{{ errors.first('formData.email') }} </span>
                 </div>
                 <div>
                     <label for="zip">Zip</label>
-                    <input v-validate name="formData.zip" id="zip" data-vv-rules="required|numeric" :value="formData.zip" type="number" @input="updateZip">
+                    <input v-validate name="zip" id="zip" data-vv-rules="required|numeric" :value="formData.zip" type="number" @input="updateZip">
                     <span>{{ errors.first('formData.zip') }} </span>
                 </div>
                 <div>
                     <label for="address">Address</label>
-                    <input v-validate name="formData.address" id="address" data-vv-rules="required" :value="formData.address" type="text" @input="updateAddress">
+                    <input v-validate name="address" id="address" data-vv-rules="required" :value="formData.address" type="text" @input="updateAddress">
                     <span>{{ errors.first('formData.address') }} </span>
                 </div>                                
                 <div> 
@@ -35,7 +35,8 @@ import { IFormData } from '../../models/form-data'
                 </div>
             </form> 
         </div>
-    `
+    `,
+    name: 'form'
 })
 export default class FormPage extends Vue {
     

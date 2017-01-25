@@ -1,4 +1,4 @@
-import { app, router, store } from './main'
+import { app } from './main'
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -11,8 +11,8 @@ export default context => {
   const s = isDev && Date.now()
 
   // set router's location
-  router.push(context.url)
-  const matchedComponents = router.getMatchedComponents()
+  app.$router.push(context.url)
+  const matchedComponents = app.$router.getMatchedComponents()
 
   // no matched routes
   if (!matchedComponents.length) {
@@ -26,7 +26,7 @@ export default context => {
   return Promise.all(matchedComponents.map(component => {
     if (component.extendOptions.methods && component.extendOptions.methods.preFetch) {
       return component.extendOptions.methods
-        .preFetch(store, context)
+        .preFetch(app.$store, context)
         .then(data => {
           const currentData = component.options.data();
 
@@ -45,7 +45,7 @@ export default context => {
     // inline the state in the HTML response. This allows the client-side
     // store to pick-up the server-side state without having to duplicate
     // the initial data fetching on the client.
-    context.initialState = store.state
+    context.initialState = app.$store.state
     return app
   })
 }
